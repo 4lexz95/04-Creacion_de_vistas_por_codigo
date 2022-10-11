@@ -11,6 +11,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.LayoutInflater;
 import android.view.View;
 
 import alex.example.a04_creaciondevistasporcodigo.databinding.ActivityMainBinding;
@@ -84,9 +85,27 @@ public class MainActivity extends AppCompatActivity {
 
         for (AlumnoModel alumno: alumnoModelArrayList
              ) {
+            LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
+                    //getLayoutInflater() es lo mismo
+
+            View  alumnoview = layoutInflater.inflate(R.layout.alumno_model_view,null);
+            TextView txtNombre = alumnoview.findViewById(R.id.lblNombreAlumnoView);
+            TextView txtApellidos = alumnoview.findViewById(R.id.lblApellidosAlumnoView);
+            TextView txtCiclo = alumnoview.findViewById(R.id.lblCiclosAlumnoView);
+            TextView txtGrupo = alumnoview.findViewById(R.id.lblGrupoAlumnoView);
+
+            txtNombre.setText(alumno.getNombre());
+            txtApellidos.setText(alumno.getApellidos());
+            txtCiclo.setText(alumno.getCiclo());
+            txtGrupo.setText(String.valueOf(alumno.getGrupo()));
+
+            /*
+            // sustitur por un XML
             TextView txtAlumno = new TextView(MainActivity.this);
             txtAlumno.setText(alumno.toString());
-            binding.contentMain.contendorMain.addView(txtAlumno);
+
+             */
+            binding.contentMain.contendorMain.addView(alumnoview);
 
         }
 
